@@ -333,7 +333,9 @@
           parsedValue = parseFloat(this.value, 10);
 
       if (isNaN(Number(this.value))) {
-        msgs.push(messages.not_a_number);
+        if (isNaN(Number(this.value.replace(/,(\d+)$/,'.$1')))) {
+          msgs.push(messages.not_a_number);
+        }
       } else {
         if (options.odd && isEven(parsedValue)) msgs.push(messages.odd);
         if (options.even && isOdd(parsedValue)) msgs.push(messages.even);
